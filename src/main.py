@@ -1,4 +1,7 @@
-"""Aplication entry point."""
+"""Aplication entry point.
+
+The module contains FastAPI application instance and its configuration.
+"""
 
 
 from fastapi import FastAPI
