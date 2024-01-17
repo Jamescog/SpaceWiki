@@ -32,6 +32,7 @@ app.add_middleware(
     allow_headers=["*"],  # allow all headers
 )
 
+
 @app.get("/")
 def root():
     """Root endpoint."""
