@@ -32,6 +32,11 @@ app.add_middleware(
     allow_headers=["*"],  # allow all headers
 )
 
+@app.get("/")
+def root():
+    """Root endpoint."""
+    return {"message": "Such empty. More content coming soon."}
+
 
 if __name__ == "__main__":
     import uvicorn
