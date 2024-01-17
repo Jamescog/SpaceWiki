@@ -1,7 +1,6 @@
 # SpaceWiki
 The SpaceWiki API is designed to provide access to space-related content from our SpaceWiki platform. This API allows you to retrieve information about planets, stars, solar systems, and space-related vocabulary. 
 
-
 ## How to Install and Run the Project
 1. Clone the project
     ```
@@ -9,14 +8,14 @@ The SpaceWiki API is designed to provide access to space-related content from ou
     
     cd SpaceWiki
     ```
-2. Create virtual environment
+2. Create a virtual environment
     - For Windows
     ```
-        pip install virtualenv # if you don't have virtualenv installed
+    pip install virtualenv # if you don't have virtualenv installed
 
-        python -m venv venv
+    python -m venv venv
 
-        venv\Scripts\activate
+    venv\Scripts\activate
     ```
     - For Linux
     ```
@@ -35,3 +34,8 @@ The SpaceWiki API is designed to provide access to space-related content from ou
 
     python src/main.py -> for Linux
     ```
+
+5. Access Documentation and Execute requests
+    Fire up your favorite browser and visit either [this]('http://localhost:8000/docs') or [this]('http://localhost://localhost:8000/redoc').
+
+Happy Coding! :rocket:
