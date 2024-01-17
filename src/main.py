@@ -22,14 +22,11 @@ app = FastAPI(
 app.add_middleware(
     CORSMiddleware,
     # everything from localhost for now,
-    allow_origin_regex="^http:\/\/.*localhost.*",
-    # allow cookies
-    allow_credentials=True,
-    # allow all methods
-    allow_methods=["GET", "POST", "PUT", "DELETE",
-                   "OPTIONS"],
-    # allow all headers
-    allow_headers=["*"],
+    allow_origin_regex="^http://.*localhost.*",
+    allow_credentials=True,  # allow cookies
+    allow_methods=["GET", "POST", "PUT",
+                   "DELETE", "OPTIONS"],  # allow all methods
+    allow_headers=["*"],  # allow all headers
 )
 
 
