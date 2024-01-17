@@ -1,4 +1,5 @@
 fastapi==0.104.1
 python-dotenv==1.0.0
 pymongo==4.6.0
-
+uvicorn==0.26.0
+Werkzeug==3.0.1
