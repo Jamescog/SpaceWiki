@@ -36,6 +36,6 @@ The SpaceWiki API is designed to provide access to space-related content from ou
     ```
 
 5. Access Documentation and Execute requests
-    Fire up your favorite browser and visit either [this]('http://localhost:8000/docs') or [this]('http://localhost://localhost:8000/redoc').
+    Fire up your favorite browser and visit either [this](http://localhost:8000/docs) or [this](http://localhost://localhost:8000/redoc).
 
 Happy Coding! :rocket:
