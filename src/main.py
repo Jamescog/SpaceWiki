@@ -6,6 +6,8 @@ The module contains FastAPI application instance and its configuration.
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from auth.router import router as auth_router
+from post.router import router as post_router
 
 title = "SpaceWiki API"
 discription = """
@@ -14,12 +16,12 @@ content from our SpaceWiki platform.
 This API allowsusers to retrieve information about planets,
 stars, solar systems,and space-related vocabulary."""
 
-version = "0.0.1"
+VERSION = "0.0.1"
 
 app = FastAPI(
     title=title,
     description=discription,
-    version=version
+    version=VERSION
 )
 
 app.add_middleware(
@@ -32,13 +34,14 @@ app.add_middleware(
     allow_headers=["*"],  # allow all headers
 )
 
-
+app.include_router(auth_router, tags=["auth"], prefix="/v1/auth")
+app.include_router(post_router, tags=["post"], prefix="/v1/post")
 @app.get("/")
 def root():
     """Root endpoint."""
     return {"message": "Such empty. More content coming soon."}
 
 
-if __name__ == "__main__":
-    import uvicorn
-    uvicorn.run(app)  # you can change host, port, etc using kwargs
+# if __name__ == "__main__":
+#     import uvicorn
+#     uvicorn.run(app)  # you can change host, port, etc using kwargs

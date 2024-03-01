@@ -1,10 +1,11 @@
+"""Contains utility functions for the auth module."""
 
 
-from jwt import decode, encode
-from jwt.exceptions import ExpiredSignatureError, InvalidTokenError
 from datetime import datetime, timedelta
 from uuid import uuid4
 from os import getenv
+from jwt import decode, encode
+from jwt.exceptions import ExpiredSignatureError, InvalidTokenError
 
 
 def create_token(payload: dict) -> str:
