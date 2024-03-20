@@ -81,7 +81,7 @@ class Post(BaseModel):
     tags: List[str]
     video_links: List[HttpUrl]
     image_links: List[HttpUrl]
-    references: List[HttpUrl]
+    references: Optional[List[HttpUrl]] = List[str]
     category: str
     author: str
 
