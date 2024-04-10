@@ -24,10 +24,17 @@ app = FastAPI(
     version=VERSION
 )
 
+origins = [
+    "http://localhost",
+    "http://localhost:8080",
+    'https://space-wiki-main.vercel.app/'
+    # add more origins as needed
+]
+
 app.add_middleware(
     CORSMiddleware,
     # everything from localhost for now,
-    allow_origin_regex="^http://.*localhost.*",
+    allow_origins=origins,
     allow_credentials=True,  # allow cookies
     allow_methods=["GET", "POST", "PUT",
                    "DELETE", "OPTIONS"],  # allow all methods
