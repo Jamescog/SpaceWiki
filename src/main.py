@@ -27,7 +27,7 @@ app = FastAPI(
 origins = [
     "http://localhost",
     "http://localhost:8080",
-    'https://space-wiki-main.vercel.app/'
+    'https://space-wiki-main.vercel.app'
     # add more origins as needed
 ]
 
