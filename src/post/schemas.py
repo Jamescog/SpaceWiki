@@ -48,9 +48,9 @@ class PostCreate(BaseModel):
     title: str
     content: str
     tags: List[str]
-    video_links: Optional[List[str]] = None
-    image_links: Optional[List[str]] = None
-    references: Optional[List[str]] = None
+    video_links: Optional[HttpUrl] = None
+    image_links: Optional[List[HttpUrl]] = None
+    references: Optional[List[HttpUrl]] = None
     category: PostCategory
 
     class Config:
@@ -79,8 +79,8 @@ class Post(BaseModel):
     title: str
     content: str
     tags: List[str]
-    video_links: List[HttpUrl]
-    image_links: List[HttpUrl]
+    video_links: List[HttpUrl] = None
+    image_links: List[HttpUrl] = None
     references: Optional[List[HttpUrl]] = List[str]
     category: str
     author: str
