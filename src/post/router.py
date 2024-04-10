@@ -19,7 +19,8 @@ import os
 from secrets import token_urlsafe
 from post.schemas import (PostCreate,
                           PostResponse,
-                          EditPost)
+                          EditPost,
+                          Post)
 
 
 security = HTTPBearer()
@@ -71,10 +72,10 @@ async def create_post_with_file(credentials: HTTPAuthorizationCredentials = Depe
     res = decode_token(bearer_token)
     if "error" in  res:
         raise HTTPException(status_code=401, detail=res["error"])
-    
 
-    # save the files with unique names
-    base_url= "http://localhost:8000/v1/post/files/" # change this in production
+
+    #save the files with unique names
+    base_url= "https://spacewiki.jamescog.com/v1/post/files/" # change this in production
     try:
         video_links = []
         image_links = []
@@ -118,10 +119,10 @@ async def create_post_with_file(credentials: HTTPAuthorizationCredentials = Depe
     
 
     return {"message": "Post created successfully.",
-            "id": str(post_data["_id"])
+            "id": "id"
             }
 
-@router.get("/get", response_model=PostResponse)
+@router.get("/get", response_model=Post)
 async def get_post(post_id: str):
     """Returns the post that matches the given id
     
@@ -129,10 +130,11 @@ async def get_post(post_id: str):
     """
 
     post = await post_collection().find_one({"_id": ObjectId(post_id)})
+    print(post)
     if not post:
         raise HTTPException(status_code=404, detail="Post not found")
-    post["_id"] = str(post["_id"])
-    return {"post": post}
+    post["id"] = str(post["_id"])
+    return post
 
 @router.get("/get-all", response_model=PostResponse)
 async def get_all_post(skip: int = 0, limit: int = 10):
@@ -145,7 +147,7 @@ async def get_all_post(skip: int = 0, limit: int = 10):
     posts_list = await posts.to_list(length=limit)
     for post in posts_list:
         print(post)
-        post["_id"] = str(post["_id"])
+        post["id"] = str(post["_id"])
     return {"posts": posts_list}
 
 
@@ -161,7 +163,7 @@ async def get_by_title(title:str):
     posts = post_collection().find({"title": title})
     posts_list = await posts.to_list(length=10)# length can be customized as needed
     for post in posts_list:
-        post["_id"] = str(post["_id"])
+        post["id"] = str(post["_id"])
     return {"posts": posts_list} 
 
 @router.get("/get-by-author", response_model=PostResponse)
@@ -261,7 +263,7 @@ async def delete_user_post(post_id: str, credentials: HTTPAuthorizationCredentia
 
 
 
-@router.get("/files/{file_path:path}", include_in_schema=False)
+@router.get("/files/{file_path:path}")
 async def get_file(file_path: str, download: Optional[str] = False):
     """
     Endpoint to serve files from the server.

@@ -75,7 +75,7 @@ class PostCreate(BaseModel):
 
 class Post(BaseModel):
     """Pydanctic class that represents post"""
-    _id: str
+    id: str
     title: str
     content: str
     tags: List[str]
