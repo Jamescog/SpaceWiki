@@ -1,7 +1,7 @@
 """Contains utility functions for the auth module."""
 
 
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from uuid import uuid4
 from os import getenv
 from jwt import decode, encode
@@ -10,8 +10,8 @@ from jwt.exceptions import ExpiredSignatureError, InvalidTokenError
 
 def create_token(payload: dict) -> str:
     """Creates a JWT token from a payload."""
-    payload["exp"] = datetime.utcnow() + timedelta(days=7)
-    payload["iat"] = datetime.utcnow()
+    payload["exp"] = datetime.now(tz=timezone.utc) + timedelta(days=7)
+    payload["iat"] = datetime.now(tz=timezone.utc)
     payload["jti"] = str(uuid4())
     payload['iss'] = 'AASTU-SpaceWiki'
     token = encode(payload=payload,
