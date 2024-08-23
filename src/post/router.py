@@ -122,7 +122,7 @@ async def create_post_with_file(credentials: HTTPAuthorizationCredentials = Depe
             "id": "id"
             }
 
-@router.get("/get", response_model=Post)
+@router.get("/get")
 async def get_post(post_id: str):
     """Returns the post that matches the given id
     
@@ -130,13 +130,13 @@ async def get_post(post_id: str):
     """
 
     post = await post_collection().find_one({"_id": ObjectId(post_id)})
-    print(post)
     if not post:
         raise HTTPException(status_code=404, detail="Post not found")
     post["id"] = str(post["_id"])
+    del post["_id"]
     return post
 
-@router.get("/get-all", response_model=PostResponse)
+@router.get("/get-all")
 async def get_all_post(skip: int = 0, limit: int = 10):
     """Returns all the posts
     
@@ -146,14 +146,14 @@ async def get_all_post(skip: int = 0, limit: int = 10):
     posts = post_collection().find().skip(skip).limit(limit)
     posts_list = await posts.to_list(length=limit)
     for post in posts_list:
-        print(post)
         post["id"] = str(post["_id"])
+        del post["_id"]
     return {"posts": posts_list}
 
 
 
 
-@router.get("/get-by-title", response_model=PostResponse)
+@router.get("/get-by-title")
 async def get_by_title(title:str):
     """Returns the post(s) that matches the given title
     
@@ -164,6 +164,7 @@ async def get_by_title(title:str):
     posts_list = await posts.to_list(length=10)# length can be customized as needed
     for post in posts_list:
         post["id"] = str(post["_id"])
+        del post["_id"]
     return {"posts": posts_list} 
 
 @router.get("/get-by-author", response_model=PostResponse)
@@ -178,10 +179,11 @@ async def get_by_author(author: str,
     posts_list = await posts.to_list(length=limit)# length can be customized as needed
     for post in posts_list:
         post["_id"] = str(post["_id"])
+        del post["_id"]
     return {"posts": posts_list}
 
 
-@router.get("/myposts", response_model=PostResponse)
+@router.get("/myposts")
 async def get_my_posts(credentials: HTTPAuthorizationCredentials = Depends(security),
                        skip: int = 0, limit: int = 10):
     """Endpoint for user to retrieve his/her post
@@ -197,6 +199,7 @@ async def get_my_posts(credentials: HTTPAuthorizationCredentials = Depends(secur
     posts_list = await posts.to_list(length=limit)# length can be customized as needed
     for post in posts_list:
         post["_id"] = str(post["_id"])
+        del post["_id"]
     return {"posts": posts_list}
 
 @router.put("/edit")
